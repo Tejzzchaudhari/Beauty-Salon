@@ -1,0 +1,279 @@
+<!-- I have already made navigation bar so please watch part 1 of this series I am just going to copy all the code  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saroj Salon Website</title>
+
+    <!-- adding css  -->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- about css  -->
+    <link rel="stylesheet" href="./css/services.css">
+
+    <!-- mediaQuery css  -->
+    <link rel="stylesheet" href="./css/MediaQuery.css">
+
+    <!-- fontawesome  -->
+    <script src="https://kit.fontawesome.com/7a6c6b42a6.js" crossorigin="anonymous">
+fetch("http://localhost:8080/api/services")
+    .then(response => response.json())
+    .then(data => {
+        let servicesList = document.querySelector(".ser-box");
+        servicesList.innerHTML = "";
+        data.forEach(service => {
+            servicesList.innerHTML += `<div class="box"><h2>${service}</h2></div>`;
+        });
+    })
+    .catch(error => console.error("Error fetching services:", error));
+
+fetch("http://localhost:8080/api/services")
+    .then(response => response.json())
+    .then(data => {
+        let servicesList = document.querySelector(".ser-box");
+        servicesList.innerHTML = "";
+        data.forEach(service => {
+            servicesList.innerHTML += `<div class="box"><h2>${service.name} - ₹${service.price}</h2></div>`;
+        });
+    })
+    .catch(error => console.error("Error fetching services:", error));
+
+    document.getElementById("appointmentForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    let appointmentData = {
+        name: document.getElementById("name").value,
+        service: document.getElementById("service").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value
+    };
+
+    fetch("http://localhost:8080/api/appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(appointmentData)
+    })
+    .then(response => response.text())
+    .then(data => alert(data))
+    .catch(error => console.error("Error:", error));
+});
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <a href="#" class="logo">Saroj Beauty Salon</a>
+        <div class="menuToggle"></div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./portfolio.html">Portfolio</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="#" id="NavNum">+91 9033802109</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section class="sectionFirst">
+        <h1>Services</h1>
+
+        <!-- transparent Img -->
+        <section class="transform-img">
+            <img src="./img/background180.svg" alt="">
+        </section>
+    </section>
+
+
+    <!-- section second  -->
+    <section class="aboutServices">
+        <div class="ser-litText">Choose From Collection</div>
+        <p class="ser-text"> Our Collection offers a range of bridal looks and services to help you look stunning from head to toe.</p>
+
+        <div class="ser-box">
+            <div class="box">
+                <div class="img">
+                    <img src="./img/nailart_1.jpg" alt="">
+                </div>
+                <div class="boxinfo">
+                    <div class="ser-name">Clean Nail Art</div>
+                    <p class="ser-discription">Clean Nail Art is a minimalist and elegant approach to nail design, focusing on simplicity, precision, and modern aesthetics. It combines the art of manicures with refined designs that are clean, crisp, and often subtle but still visually striking.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="./img/haircut_2.jpg" alt="">
+                </div>
+                <div class="boxinfo">
+
+                    <div class="ser-name">Hair Styling</div>
+                    <p class="ser-discription">Hair Styling is an art form that enhances your natural beauty by transforming your hair into a beautiful, polished, and trendy look. Whether it's for an everyday style, a special occasion, or a glamorous event, the right hairstyle can elevate your confidence and overall appearance.</p>
+                </div>
+
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="./img/massage_3.jpg" alt="">
+                </div>
+                <div class="boxinfo">
+
+                    <div class="ser-name">Full Body Massage</div>
+                    <p class="ser-discription">Full Body Massage is a therapeutic practice that involves applying different techniques to the entire body to promote relaxation, relieve muscle tension, improve circulation, and enhance overall well-being.</p>
+                </div>
+
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="./img/cosmetics_4.jpg" alt="">
+                </div>
+                <div class="boxinfo">
+
+                    <div class="ser-name">Stocked Cosmetic Store</div>
+                    <p class="ser-discription">A Stocked Cosmetic Store is a well-organized retail space that offers a wide variety of beauty and cosmetic products, providing everything customers need to enhance their personal care routines. These stores typically carry a comprehensive selection of items ranging from skincare, makeup, and hair care products to fragrance, tools, and accessories. </p>
+                </div>
+
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="./img/spa_5.jpg" alt="">
+                </div>
+
+                <div class="boxinfo">
+
+                    <div class="ser-name">Fully Equipped Spa</div>
+                    <p class="ser-discription">A Fully Equipped Spa is a luxury wellness destination that offers a comprehensive range of services aimed at promoting relaxation, rejuvenation, and overall well-being. Whether you’re looking to indulge in a full day of pampering or simply unwind after a hectic week, a fully equipped spa ensures that all the amenities, treatments, and tools necessary for a holistic wellness experience are available.</p>
+                </div>
+
+            </div>
+            <div class="box">
+                <div class="img">
+                    <img src="./img/botox_6.jpg" alt="">
+                </div>
+                <div class="boxinfo">
+
+                    <div class="ser-name">Authorized Botox</div>
+                    <p class="ser-discription">Authorized Botox refers to the use of Botox injections performed by a certified, licensed professional who is authorized to administer the treatment. Botox (botulinum toxin) is a popular cosmetic treatment used to reduce the appearance of wrinkles and fine lines, as well as to treat medical conditions like excessive sweating and migraines.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- discount section  -->
+    <section class="DiscountSection">
+
+        <div class="img">
+            <img src="./img/25off.png" alt="">
+        </div>
+
+        <div class="textinfo">
+            <h2>Book Your Appointment Now And Get 25% Off</h2>
+            <p>Awesome Summer Sale - 25% Off on All Professional Make Up</p>
+        </div>
+
+        <a href="#">BOOK AN APPOINTMENT</a>
+    </section>
+
+    <!-- ----slider----- -->
+    <section class="imgslidertext">
+        <div class="imgslider">
+            <img src="E:\Saroj_Salon_Website-master\Saroj_Salon_Website-master\image\nn.jpeg" alt="" class="slide">
+            <img src="E:\Saroj_Salon_Website-master\Saroj_Salon_Website-master\image\n (2).jpeg" alt="" class="slide">
+            <img src="E:\Saroj_Salon_Website-master\Saroj_Salon_Website-master\image\n (3).jpeg" alt="" class="slide">
+
+            <i class="fa-solid fa-chevron-left prev" onclick="goPrev()"></i>
+            <i class="fa-solid fa-chevron-right next" onclick="goNext()"></i>
+        </div>
+
+        <div class="slideText">
+            <div class="st-heading">The Best Bridal Makeup Offer</div>
+            <p class="lit-text">Your wedding day is one of the most memorable and special occasions of your life, and looking your absolute best is a priority. With The Best Bridal Makeup Offer, we provide you with a luxurious and personalized beauty experience to ensure you feel confident and radiant on your big day..</p>
+
+            <div class="lit-service">
+                <div class="textinfo">
+                    <div class="ti-head" >Pre-Wedding Photo shoot</div>
+                    <p class="des">A Pre-Wedding Photoshoot is an essential part of many couples' wedding journey, offering a beautiful opportunity to capture the love, excitement, and anticipation before the big day. Whether you're looking for romantic, fun, or candid moments, our Pre-Wedding Photoshoot Package is designed to help you create memories that will last a lifetime.</p>
+                </div>
+                <div class="textinfo">
+                    <div class="ti-head" >The Engagement Day</div>
+                    <p class="des">The Engagement Day marks the beginning of a couple's journey towards marriage and symbolizes a significant step in their shared future. It is a day filled with joy, excitement, and love as two people make a commitment to each other, surrounded by family and friends. </p>
+                </div>
+                <div class="textinfo">
+                    <div class="ti-head" >The Grand Wedding Day</div>
+                    <p class="des">The Grand Wedding Day is the pinnacle of a couple's love story. It’s a day filled with emotion, beauty, and timeless moments as you say "I do" and begin your new life together. On this unforgettable day, you deserve nothing less than to look and feel absolutely radiant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="beforefooter">
+        <div class="box">
+            <div class="logo">Saroj Beauty Salon</div>
+            <div class="bf-text">"Beauty begins the moment you decide to be yourself."</div>
+            <p class="para">Beauty isn't just about physical appearance or conforming to societal standards. True beauty starts when you stop pretending to be someone you’re not. When you embrace who you truly are—your personality, quirks, and unique characteristics—you exude a sense of confidence and self-love that others notice. This kind of inner radiance is far more powerful than superficial beauty.</p>
+
+            <div class="bf-text">Subscribe For Offers</div>
+
+            <div class="subscribe">
+                <input type="text" name="" id="">
+                <button class="btn">subscribe</button>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="bf-text">Quick Links</div>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./portfolio.html">Portfolio</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+
+            <div class="bf-text">Follow Us</div>
+            <div class="icons">
+                <a href="#" class="fa-brands fa-facebook-f"></a>
+                <a href="#" class="fa-brands fa-google"></a>
+                <a href="#" class="fa-brands fa-instagram"></a>
+                <a href="#" class="fa-brands fa-youtube"></a>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="bf-text">Visit our Websites!</div>
+            <ul class="SayHi">
+                <li><a href="./index.html">saroj195@gmail.com</a></li>
+                <li><a href="./about.html">tejzz414@gmail.com</a></li>
+            </ul>
+
+            <div class="bf-text">Call Us</div>
+            <ul class="SayHi">
+                <li>Phone :+91 9033802109</li>
+                <li>Toll Free:+91 9157582208</li>
+            </ul>
+
+            <div class="bf-text">Find Us</div>
+
+            <div class="address">
+                25, Chirag Row House Khodiyar Nagar, Chharwada Vapi, Gujarat
+            </div>
+
+        </div> 
+    </div>
+
+
+    <footer>
+        <div class="fbox">Copyright &copy; 2025 Saroj Beauty Salon</div>
+        <div class="fbox">Powered By Saroj Beauty Salon</div>
+    </footer>
+
+    <script src="./js/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saroj Salon Website</title>
+
+    <!-- Adding CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="./css/MediaQuery.css">
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/7a6c6b42a6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <header>
+        <a href="#" class="logo">Saroj Beauty Salon</a>
+        <div class="menuToggle"></div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./services.html">Services</a></li>
+                <li><a href="./portfolio.html">Portfolio</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="#" id="NavNum">+91 9033802109</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="sectionFirst">
+        <h1>Contact Us</h1>
+        <section class="transform-img">
+            <img src="./img/background180.svg" alt="">
+        </section>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="FormMap">
+        <div class="form">
+            <div class="f-head">Get In Touch</div>
+            <div class="f-para">We’re here to make it happen! Reach out to us today, and let’s create a beauty experience just for you.</div>
+
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="tel" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" title="Enter a 10-digit phone number" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" list="service" placeholder="Select Service" required>
+                
+                <datalist id="service">
+                    <option value="Clean Nail Art"></option>
+                    <option value="HairCuts"></option>
+                    <option value="Bridal Makeup"></option>
+                    <option value="Hair Coloring"></option>
+                    <option value="Hair Treatments"></option>
+                    <option value="Facials"></option>
+                    <option value="Skin Treatments"></option>
+                    <option value="Waxing"></option>
+                    <option value="Manicure"></option>
+                    <option value="Pedicure"></option>
+                    <option value="Body Scrub"></option>
+                    <option value="Body Wrap"></option>
+                    <option value="Threading"></option>
+                    <option value="Party Makeup"></option>
+                    <option value="Makeup Lessons"></option>
+                    <option value="Hair Styling"></option>
+                    <option value="Full Body Massage"></option>
+                </datalist>
+
+                <textarea id="message" cols="30" rows="10" placeholder="Message" required></textarea>
+                <button type="submit">Send Request</button>
+            </form>
+        </div>
+
+        <div class="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7480.157354172645!2d72.92669258723261!3d20.379645674852966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be0ce4cd80a74b1%3A0xf4c1dd2cf8ca7d02!2sKHODIYAR%20MATA%20Temple!5e0!3m2!1sen!2sin!4v1736003749912!5m2!1sen!2sin" 
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="fbox">Copyright &copy; 2025 Saroj Beauty Salon</div>
+        <div class="fbox">Powered By Beauty Salon</div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="./js/script.js"></script>
+    
+    <!-- JavaScript to Send Form Data to Backend -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("contactForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent page reload
+        
+                let contactData = {
+                    name: document.getElementById("name").value,
+                    phone: document.getElementById("phone").value, // ✅ Added phone field
+                    email: document.getElementById("email").value,
+                    service: document.getElementById("service").value, // ✅ Added service selection
+                    message: document.getElementById("message").value
+                };
+
+                fetch("http://localhost:8080/api/contact", { // ✅ Backend API URL
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(contactData)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data); // Show backend response
+                    document.getElementById("contactForm").reset(); // Clear form after submission
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    </script>
+
+</body>
+</html>
